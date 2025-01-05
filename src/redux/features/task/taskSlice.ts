@@ -1,3 +1,4 @@
+import { RootState } from "@/redux/store";
 import { ITask } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -14,6 +15,22 @@ const initialState: initialState = {
       isCompleted: false,
       priority: "High",
     },
+    {
+      id: "ab124",
+      title: "title",
+      description: "des",
+      dueDate: "2025-12",
+      isCompleted: false,
+      priority: "Low",
+    },
+    {
+      id: "ab134",
+      title: "title",
+      description: "des",
+      dueDate: "2025-12",
+      isCompleted: false,
+      priority: "Medium",
+    },
   ],
 };
 const taskSlice = createSlice({
@@ -21,4 +38,7 @@ const taskSlice = createSlice({
   initialState,
   reducers: {},
 });
+export const selectTask = (state: RootState) => {
+  return state.tasks.task;
+};
 export default taskSlice.reducer;
