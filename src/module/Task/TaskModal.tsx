@@ -12,7 +12,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,14 +31,18 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { addTask } from "@/redux/features/task/taskSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { ITask } from "@/types";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 export function TaskModal() {
   const form = useForm();
-  const onSubmit = (data) => {
+  const dispatch = useAppDispatch();
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+    dispatch(addTask(data as ITask));
   };
   return (
     <Dialog>
@@ -127,7 +130,7 @@ export function TaskModal() {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="priority"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Priority</FormLabel>
